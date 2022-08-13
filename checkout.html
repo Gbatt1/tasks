@@ -1,0 +1,94 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="bg-gray-300 h-full py-10" id="app">
+
+        
+        
+        <div class="w-11/12 mx-auto">
+            
+            <div class="flex justify-center space-x-12 items-center">
+
+
+                <div class=" w-6/12">
+                    <input type="text" v-model="itemname" placeholder='Enter item name' class="w-full py-1 rounded-md border px-6 ">
+                </div>
+                <div class="align-middle items-center flex justify-center space-x-2">
+                    <button @click="buttonplus()" class="rounded-md border bg-purple-900 text-white px-2 py-1">+</button>
+                    <input v-model="itemqty" type="number" min="0" name="" id="" class="rounded-md py-1 px-2 border w-4/12">
+                    <button @click="buttonminus()" class="rounded-md border bg-purple-900 text-white px-3 py-1">-</button>
+                </div>
+                
+                
+            </div>
+            
+            
+            
+        </div>
+        <div class="flex justify-end w-7/12  mx-auto my-2">
+            <button @click="add()" class="bg-yellow-500 px-4 py-2 font-bold border rounded-md">Add</button>
+        </div>
+        
+        <div class="flex justify-between w-6/12 mt-32 mx-auto" v-if="items.length >= 2">
+            <h1 class="block-inline text-purple-900 font-bold">Item name</h1>
+            <h1 class="block-inline text-purple-900 font-bold">Item qty</h1>
+        </div>
+
+<div v-for="item in items" v-if="items.length >= 2"  class="w-6/12 my-4 mx-auto">
+
+    
+    <div class="flex justify-between w-full my-4 ">
+        <h1 class="">{{item.itemname}}</h1>
+        <h1 class="">{{item.itemqty}}</h1>
+    </div>
+    <hr color="black" style="border-width:1px ;" class="border-purple-500">
+    
+</div>
+
+
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <script>
+let app = new Vue({
+
+el: '#app'
+,data: {
+items:[{itemname:'',itemqty:null}],
+
+itemname:'',
+itemqty:1,
+
+}
+,methods:{
+add(){
+
+    this.items.push({itemname:this.itemname,itemqty:this.itemqty})
+},
+buttonplus()
+{
+this.itemqty++
+},
+buttonminus()
+{
+    if(this.itemqty > 1)
+    this.itemqty--
+}
+    
+}
+
+
+})
+
+
+    </script>
+</body>
+</html>

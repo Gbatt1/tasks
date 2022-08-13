@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    
+
+    <div id="app">
+<div class="bg-gray-300 h-full px-10 py-20 text-center">
+
+<div class="w-5/12 mx-auto">
+<input type="text" name="" id="" class="w-full border rounded-md px-2 py-1" v-model="input" @keyup.enter="add()" placeholder="What are your tasks for today?">
+
+</div>
+
+<div class="" v-if="currentTasks.length >= 1">
+<h1 class="text-xl mt-10 w-10/12 mx-auto mb-8 text-left">Current Tasks</h1>
+<div class="shadow  flex mx-auto px-10 py-2 my-10 w-10/12 bg-white border rounded-md border-blue-500 justify-between" v-for="task,index in currentTasks"><h1>{{task}}</h1><div class="space-x-10">  <button @click="sendtolater(index)" class="text-blue-500 border border-white align-center hover:bg-blue-500 hover:text-white hover:border hover:rounded-md px-1">Later</button> <button class="text-red-500 border border-white hover:bg-red-500 hover:text-white hover:border hover:rounded-md px-1" @click="remove(1,index)">Remove</button></div></div>
+</div>
+
+
+
+<div class="" v-if="laterTasks.length >= 1">
+<h1 class="text-xl mt-20 w-10/12 mx-auto mb-8 text-left">Later Tasks</h1>
+<div class="shadow flex mx-auto px-10 py-2 my-10 w-10/12 bg-white border rounded-md border-green-500 justify-between" v-for="ltask,index in laterTasks"><h1>{{ltask}}</h1><div class="space-x-10">  <button class="text-green-500 hover:bg-green-500 border border-white hover:text-white hover:border hover:rounded-md px-1" @click="sendtocurrent(index)">Current</button> <button class="text-red-500 border border-white hover:bg-red-500 hover:text-white hover:border hover:rounded-md px-1" @click="remove(2,index)">Remove</button></div></div>
+</div>
+
+
+</div>
+
+
+</div>
+
+        
+    </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <script>
+let app = new Vue(
+    {
+
+el:"#app"
+,data:{
+
+    input:"",
+    currentTasks:[],
+    laterTasks:[],
+    
+}
+,methods:{
+
+remove(select,index)
+{
+if(select == 1)
+this.currentTasks.splice(index,1)
+else
+this.laterTasks.splice(index,1)
+},
+
+add()
+{
+    this.currentTasks.push(this.input)
+    this.input=""
+}
+,
+sendtolater(index)
+{
+    this.laterTasks.push(this.currentTasks[index]);
+    this.currentTasks.splice(index,1)
+    
+},
+sendtocurrent(index)
+{
+    this.currentTasks.push(this.laterTasks[index])
+    this.laterTasks.splice(index,1)
+}
+}
+
+
+    }
+)
+
+
+    </script>
+</body>
+</html>
